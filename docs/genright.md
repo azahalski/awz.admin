@@ -2,7 +2,7 @@
 
 <!-- ex3-start -->
 
-## 1. Устанавливаем модуль [awz.admin](https://github.com/zahalski/awz.admin)
+## 1. Устанавливаем модуль [awz.admin](https://github.com/azahalski/awz.admin)
 
 * поддерживаются только модули содержащие в названии директории точку, например, `partner.module`
 * дальнейшая инструкция описана для модуля с кодом `partner.module`
@@ -243,7 +243,7 @@ function InstallFiles()
 {
     CopyDirFiles(
         $_SERVER['DOCUMENT_ROOT']."/bitrix/modules/".$this->MODULE_ID."/install/components/module.config.permissions/", 
-        $_SERVER['DOCUMENT_ROOT']."/bitrix/components/awz/admin.config.permissions", 
+        $_SERVER['DOCUMENT_ROOT']."/bitrix/components/partner/module.config.permissions", 
         true, true
     );
     return true;
@@ -355,8 +355,8 @@ class Viewcurrency extends \Bitrix\Main\Access\Rule\AbstractRule
 ### 7.3.3 Проверка прав доступа в модулях
 
 ```php
-use Awz\Currency\Access\AccessController;
-use Awz\Currency\Access\Custom\ActionDictionary;
+use Partner\Module\Access\AccessController;
+use Partner\Module\Access\Custom\ActionDictionary;
 if(\Bitrix\Main\Loader::includeModule('awz.currency')){
 
 	$res = \Awz\Currency\CursTable::getCurs(date('d.m.Y'));
@@ -384,7 +384,7 @@ if (! ($MODULE_RIGHT >= "R"))
     
 #Новый вариант
 use Bitrix\Main\Loader;
-use Awz\Currency\Access\AccessController;
+use Partner\Module\Access\AccessController;
 $module_id = "partner.module";
 Loader::includeModule($module_id);
 if(!AccessController::isViewSettings())
@@ -393,7 +393,7 @@ if(!AccessController::isViewSettings())
 Добавление ссылок на настройки в меню модуля `admin/menu.php`
 
 ```php
-use Awz\Currency\Access\AccessController;
+use Partner\Module\Access\AccessController;
 use Bitrix\Main\Loader;
 $module_id = "partner.module";
 if(!Loader::includeModule($module_id)) return;
@@ -750,7 +750,7 @@ $module_id = "partner.module";
 if(!Loader::includeModule($module_id)) return;
 Extension::load('ui.sidepanel-content');
 $request = Application::getInstance()->getContext()->getRequest();
-$APPLICATION->SetTitle(Loc::getMessage('AWZ_CURRENCY_OPT_TITLE'));
+$APPLICATION->SetTitle(Loc::getMessage('PARTNER_MODULE_OPT_TITLE'));
 
 if($request->get('IFRAME_TYPE')==='SIDE_SLIDER'){
     require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_after.php");
@@ -765,16 +765,16 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_aft
 
 if ($request->getRequestMethod()==='POST' && AccessController::isEditSettings() && $request->get('Update'))
 {
-    //Option::set($module_id, "LOAD_NBRB", $request->get("LOAD_NBRB")=='Y' ? 'Y' : 'N', "");
+    //Option::set($module_id, "test", $request->get("test")=='Y' ? 'Y' : 'N', "");
 }
 
 $aTabs = array();
 
 $aTabs[] = array(
     "DIV" => "edit1",
-    "TAB" => Loc::getMessage('AWZ_CURRENCY_OPT_SECT1'),
+    "TAB" => Loc::getMessage('PARTNER_MODULE_OPT_SECT1'),
     "ICON" => "vote_settings",
-    "TITLE" => Loc::getMessage('AWZ_CURRENCY_OPT_SECT1')
+    "TITLE" => Loc::getMessage('PARTNER_MODULE_OPT_SECT1')
 );
 
 $saveUrl = $APPLICATION->GetCurPage(false).'?mid='.htmlspecialcharsbx($module_id).'&lang='.LANGUAGE_ID.'&mid_menu=1';
@@ -788,27 +788,37 @@ $tabControl->Begin();
         ?>
         <?if(false){?>
         <tr>
-            <td style="width:200px;"><?=Loc::getMessage('AWZ_CURRENCY_OPT_LOAD_NBRB_TITLE')?></td>
+            <td style="width:200px;"><?=Loc::getMessage('PARTNER_MODULE_OPT_TEST_TITLE')?></td>
             <td>
-                <?$val = Option::get($module_id, "LOAD_NBRB", "N","");?>
-                <input type="checkbox" value="Y" name="LOAD_NBRB" <?if ($val=="Y") echo "checked";?>></td>
+                <?$val = Option::get($module_id, "test", "N","");?>
+                <input type="checkbox" value="Y" name="test" <?if ($val=="Y") echo "checked";?>></td>
             </td>
         </tr>
         <?}?>
         <?
         $tabControl->Buttons();
         ?>
-        <input <?if (!AccessController::isEditSettings()) echo "disabled" ?> type="submit" class="adm-btn-green" name="Update" value="<?=Loc::getMessage('AWZ_CURRENCY_OPT_L_BTN_SAVE')?>" />
+        <input <?if (!AccessController::isEditSettings()) echo "disabled" ?> type="submit" class="adm-btn-green" name="Update" value="<?=Loc::getMessage('PARTNER_MODULE_OPT_L_BTN_SAVE')?>" />
         <input type="hidden" name="Update" value="Y" />
         <?if(AccessController::isViewRight()){?>
             <button class="adm-header-btn adm-security-btn" onclick="BX.SidePanel.Instance.open('<?=$saveUrl?>');return false;">
-                <?=Loc::getMessage('AWZ_CURRENCY_OPT_SECT2')?>
+                <?=Loc::getMessage('PARTNER_MODULE_OPT_SECT2')?>
             </button>
         <?}?>
         <?$tabControl->End();?>
     </form>
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_admin.php");
+```
+
+/lang/ru/options.php
+```php
+<?
+$MESS["PARTNER_MODULE_OPT_TITLE"] = "Модуль partner.module";
+$MESS["PARTNER_MODULE_OPT_SECT1"] = "Настройки модуля";
+$MESS["PARTNER_MODULE_OPT_SECT2"] = "Права доступа";
+$MESS["PARTNER_MODULE_OPT_L_BTN_SAVE"] = "Сохранить";
+$MESS["PARTNER_MODULE_OPT_TEST_TITLE"] = "Тестовый режим";
 ```
 
 ### 9.4 updater.php обновления модуля
@@ -904,10 +914,10 @@ if(IsModuleInstalled($moduleId)) {
 /bitrix/modules/partner.module/lang/ru/admin/menu.php
 
 ```php
-$MESS["AWZ_ADMIN_MENU_NAME_partner"] = "partner.module";
-$MESS["AWZ_ADMIN_MENU_NAME_SETT"] = "Настройки модуля";
-$MESS["AWZ_ADMIN_MENU_NAME_SETT_1"] = "Общие настройки";
-$MESS["AWZ_ADMIN_MENU_NAME_SETT_2"] = "Права доступа";
+$MESS["PARTNER_MODULE_MENU_NAME"] = "partner.module";
+$MESS["PARTNER_MODULE_MENU_NAME_SETT"] = "Настройки модуля";
+$MESS["PARTNER_MODULE_MENU_NAME_SETT_1"] = "Общие настройки";
+$MESS["PARTNER_MODULE_MENU_NAME_SETT_2"] = "Права доступа";
 ```
 
 /bitrix/modules/partner.module/admin/menu.php
@@ -916,8 +926,8 @@ $MESS["AWZ_ADMIN_MENU_NAME_SETT_2"] = "Права доступа";
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Config\Option;
-use Awz\Admin\Access\AccessController;
-use Awz\Admin\Access\Custom\ActionDictionary;
+use Partner\Module\Access\AccessController;
+use Partner\Module\Access\Custom\ActionDictionary;
 Loc::loadMessages(__FILE__);
 $module_id = "partner.module";
 if(!Loader::includeModule($module_id)) return;
@@ -927,18 +937,18 @@ if(AccessController::isViewSettings() || AccessController::isViewRight()){
     $level2 = [];
     if(AccessController::isViewSettings()){
         $level2[] = [
-            "text" => Loc::getMessage('AWZ_ADMIN_MENU_NAME_SETT_1'),
+            "text" => Loc::getMessage('PARTNER_MODULE_MENU_NAME_SETT_1'),
             "url" => "settings.php?lang=".LANGUAGE_ID.'&mid='.$module_id.'&mid_menu=1'
         ];
     }
     if(AccessController::isViewRight()){
         $level2[] = [
-            "text" => Loc::getMessage('AWZ_ADMIN_MENU_NAME_SETT_2'),
+            "text" => Loc::getMessage('PARTNER_MODULE_MENU_NAME_SETT_2'),
             "url" => "javascript:BX.SidePanel.Instance.open('/bitrix/admin/settings.php?mid=".$module_id."&lang=".LANGUAGE_ID."&mid_menu=1');"
         ];
     }
     $items[] = [
-        "text" => Loc::getMessage('AWZ_ADMIN_MENU_NAME_SETT'),
+        "text" => Loc::getMessage('PARTNER_MODULE_MENU_NAME_SETT'),
         "items_id" => str_replace('.','_',$module_id).'_sett',
         "items"=>$level2
     ];
@@ -949,8 +959,8 @@ $aMenu[] = array(
     "section" => str_replace('.','_',$module_id),
     "sort" => 100,
     "module_id" => $module_id,
-    "text" => Loc::getMessage('AWZ_ADMIN_MENU_NAME_partner'),
-    "title" => Loc::getMessage('AWZ_ADMIN_MENU_NAME_partner'),
+    "text" => Loc::getMessage('PARTNER_MODULE_MENU_NAME'),
+    "title" => Loc::getMessage('PARTNER_MODULE_MENU_NAME'),
     "items_id" => str_replace('.','_',$module_id),
     "items" => $items,
 );
