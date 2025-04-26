@@ -148,6 +148,7 @@ class awz_admin extends CModule
     function InstallFiles()
     {
         CopyDirFiles($_SERVER['DOCUMENT_ROOT']."/bitrix/modules/".$this->MODULE_ID."/install/admin/", $_SERVER['DOCUMENT_ROOT']."/bitrix/admin/", true);
+        CopyDirFiles($_SERVER['DOCUMENT_ROOT']."/bitrix/modules/".$this->MODULE_ID."/install/js/", $_SERVER['DOCUMENT_ROOT']."/bitrix/js/awz.admin/", true);
         CopyDirFiles($_SERVER['DOCUMENT_ROOT']."/bitrix/modules/".$this->MODULE_ID."/install/components/awz/public.ui.filter/", $_SERVER['DOCUMENT_ROOT']."/bitrix/components/awz/public.ui.filter", true, true);
         CopyDirFiles($_SERVER['DOCUMENT_ROOT']."/bitrix/modules/".$this->MODULE_ID."/install/components/awz/public.ui.grid/", $_SERVER['DOCUMENT_ROOT']."/bitrix/components/awz/public.ui.grid", true, true);
         CopyDirFiles($_SERVER['DOCUMENT_ROOT']."/bitrix/modules/".$this->MODULE_ID."/install/components/awz/admin.config.permissions/", $_SERVER['DOCUMENT_ROOT']."/bitrix/components/awz/admin.config.permissions", true, true);
@@ -157,6 +158,7 @@ class awz_admin extends CModule
     function UnInstallFiles()
     {
         DeleteDirFilesEx("/bitrix/components/awz/public.ui.filter");
+        DeleteDirFilesEx("/bitrix/js/awz.admin");
         DeleteDirFilesEx("/bitrix/components/awz/public.ui.grid");
         DeleteDirFilesEx("/bitrix/components/awz/admin.config.permissions");
         DeleteDirFiles(
