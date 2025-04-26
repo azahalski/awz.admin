@@ -424,14 +424,14 @@ if(AccessController::isViewSettings() || AccessController::isViewRight()){
 
 ## 8.1 Структура классов
 
-### Awz\Admin\Access
+### Partner\Module\Access
 
 | Класс            | Описание                                                      |
 |------------------|---------------------------------------------------------------|
 | Handlers         | Содержит обработчии (например расчет кодов прав)              |
 | AccessController | Контроллер для проверки прав доступа в своих модулях          |
 
-### Awz\Admin\Access\Tables
+### Partner\Module\Access\Tables
 
 Таблицы в базе данных
 
@@ -441,33 +441,33 @@ if(AccessController::isViewSettings() || AccessController::isViewRight()){
 | RoleTable         |          |
 | RoleRelationTable |          |
 
-### Awz\Admin\Access\Entity
+### Partner\Module\Access\Entity
 
 | Класс   | Описание |
 |---------|----------|
 | User    |          |
 
-### Awz\Admin\Access\Component
+### Partner\Module\Access\Component
 
 | Класс                 | Описание |
 |-----------------------|----------|
 | ConfigPermissions     |          |
 
-### Awz\Admin\Access\EntitySelectors
+### Partner\Module\Access\EntitySelectors
 
 | Класс | Описание |
 |-------|----------|
 | Group |          |
 | User  |          |
 
-### Awz\Admin\Access\Model
+### Partner\Module\Access\Model
 
 | Класс     | Описание |
 |-----------|----------|
 | BaseModel |          |
 | UserModel |          |
 
-### Awz\Admin\Access\Permission
+### Partner\Module\Access\Permission
 
 | Класс                | Описание |
 |----------------------|----------|
@@ -477,7 +477,7 @@ if(AccessController::isViewSettings() || AccessController::isViewRight()){
 | RoleUtil             |          |
 | RuleFactory          |          |
 
-### Awz\Admin\Access\Permission\Rules
+### Partner\Module\Access\Permission\Rules
 
 | Класс                  | Описание |
 |------------------------|----------|
@@ -488,7 +488,7 @@ if(AccessController::isViewSettings() || AccessController::isViewRight()){
 
 ## 8.2. Структура - Классы для кастомизации
 
-### Awz\Admin\Access\Custom
+### Partner\Module\Access\Custom
 
 Справочники констант и логика для компонента управления прав
 
@@ -500,7 +500,7 @@ if(AccessController::isViewSettings() || AccessController::isViewRight()){
 | PermissionDictionary      |          |
 | RoleDictionary            |          |
 
-### Awz\Admin\Access\Custom\Rules
+### Partner\Module\Access\Custom\Rules
 
 Содержатся сгенерированные классы прав 
 
