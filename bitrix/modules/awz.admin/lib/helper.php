@@ -774,13 +774,13 @@ class Helper {
                             if($val['ID'] && $val['VALUE']){
                                 $items[] = [
                                     'NAME'=>$val['VALUE'],
-                                    'VALUE'=>$val['ID'],
+                                    'VALUE'=>(string)$val['ID'],
                                 ];
                             }
                         }else{
                             $items[] = [
                                 'NAME'=>$val,
-                                'VALUE'=>$code,
+                                'VALUE'=>(string)$code,
                             ];
                         }
                     }
@@ -1417,11 +1417,11 @@ class Helper {
             foreach($fieldData['values'] as $k=>$v){
                 if(is_array($v)){
                     if($v['ID'] && $v['VALUE']){
-                        $enumValues[$v['ID']] = $v['VALUE'];
+                        $enumValues[(string)$v['ID']] = $v['VALUE'];
                     }
                 }else{
                     if(trim($k))
-                        $enumValues[$k] = $v;
+                        $enumValues[(string)$k] = $v;
                 }
             }
 
@@ -1436,7 +1436,7 @@ class Helper {
                     $row->arRes[$fieldCode] = $notEmptyAr;
                     foreach($row->arRes[$fieldCode] as $val){
                         if(!isset($enumValues[$val])){
-                            $enumValues[$val] = 'ID: '.$val;
+                            $enumValues[(string)$val] = 'ID: '.$val;
                         }
                     }
                 }
@@ -1448,12 +1448,12 @@ class Helper {
                     $row->AddViewField($fieldCode, "");
                 }
             }else{
-                if(!isset($enumValues[$row->arRes[$fieldCode]])) $enumValues[$row->arRes[$fieldCode]] = $row->arRes[$fieldCode] ? 'ID: '.$row->arRes[$fieldCode] : '-';
+                if(!isset($enumValues[(string)$row->arRes[$fieldCode]])) $enumValues[(string)$row->arRes[$fieldCode]] = $row->arRes[$fieldCode] ? 'ID: '.$row->arRes[$fieldCode] : '-';
                 if(!$fieldData['isReadOnly']){
                     $row->AddSelectField($fieldCode, $enumValues, array("size" => $size));
                 }
-                if(isset($fieldData['values'][$row->arRes[$fieldCode]])){
-                    $row->AddViewField($fieldCode, $enumValues[$row->arRes[$fieldCode]]);
+                if(isset($fieldData['values'][(string)$row->arRes[$fieldCode]])){
+                    $row->AddViewField($fieldCode, $enumValues[(string)$row->arRes[$fieldCode]]);
                 }
             }
             return;
