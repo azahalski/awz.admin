@@ -2599,8 +2599,9 @@
 				});
 			},
 			getDropdownValueItemByValue: function getDropdownValueItemByValue(items, value) {
+				//console.log('tst',value);
 				var result = items.filter(function (current) {
-					return current.VALUE === value;
+					return current.VALUE == value;
 				});
 				return result.length > 0 ? result[0] : items[0];
 			},
@@ -3975,6 +3976,7 @@
 				var cells = this.getCells();
 				var values = {};
 				var cellValues;
+				//console.log(cellValues);
 				[].forEach.call(cells, function (current) {
 					cellValues = self.getCellEditorValue(current);
 
