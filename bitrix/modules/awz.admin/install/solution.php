@@ -8,4 +8,6 @@ unset($dirs);
 $optFilePath = dirname(__DIR__) . DIRECTORY_SEPARATOR. 'options.php';
 if(file_exists($optFilePath)){
     LocalRedirect('/bitrix/admin/settings.php?lang='.LANG.'&mid='.$MODULE_ID);
+}else{
+    LocalRedirect('/bitrix/admin/partner_modules.php?lang='.LANG);
 }

@@ -33,7 +33,7 @@ IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/'.$moduleId.'/i
             </p>
         </div>
         <?}?>
-        <?if($opts['base']){?>
+        <?if($opts['sett']){?>
         <div class="awz_module-wrap-opts-row">
             <p><b><?= GetMessage('MOD_UNINST_SAVE_OPTS')?>:</b></p>
             <p>
