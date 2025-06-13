@@ -577,10 +577,6 @@ class partner_module extends CModule
         $arModuleVersion = array();
         include(__DIR__.'/version.php');
 
-        $dirs = explode('/',dirname(__DIR__ . '../'));
-        $this->MODULE_ID = array_pop($dirs);
-        unset($dirs);
-
 		$this->MODULE_VERSION = $arModuleVersion["VERSION"];
 		$this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
         /*$this->MODULE_NAME = Loc::getMessage("AWZ_ADMIN_MODULE_NAME");
@@ -601,11 +597,6 @@ class partner_module extends CModule
 
         ModuleManager::RegisterModule($this->MODULE_ID);
 
-        $filePath = dirname(__DIR__ . '/../../options.php');
-        if(file_exists($filePath)){
-            LocalRedirect('/bitrix/admin/settings.php?lang='.LANG.'&mid='.$this->MODULE_ID.'&mid_menu=1');
-        }
-
         return true;
     }
     
@@ -615,7 +606,10 @@ class partner_module extends CModule
 
         $step = intval($step);
         if($step < 2) { //выводим предупреждение
-            $APPLICATION->IncludeAdminFile(Loc::getMessage('AWZ_ADMIN_INSTALL_TITLE'), $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/'. $this->MODULE_ID .'/install/unstep.php');
+            $APPLICATION->IncludeAdminFile(
+            Loc::getMessage('AWZ_ADMIN_INSTALL_TITLE'), 
+            $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/'. $this->MODULE_ID .'/install/unstep.php'
+            );
         }
         elseif($step == 2) {
             //проверяем условие
