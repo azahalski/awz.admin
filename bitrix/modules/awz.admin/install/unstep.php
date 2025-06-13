@@ -38,7 +38,7 @@ IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/'.$moduleId.'/i
             <p><b><?= GetMessage('MOD_UNINST_SAVE_OPTS')?>:</b></p>
             <p>
                 <input type="checkbox" name="saveopts" id="saveopts" value="Y" checked>
-                <label for="save"><?= GetMessage('MOD_UNINST_SAVE_OPTS_LABEL')?></label>
+                <label for="saveopts"><?= GetMessage('MOD_UNINST_SAVE_OPTS_LABEL')?></label>
             </p>
         </div>
         <?}?>
@@ -47,7 +47,7 @@ IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/'.$moduleId.'/i
             <p><b><?= GetMessage('MOD_UNINST_SAVE_EVENTS_DESC')?>:</b></p>
             <p>
                 <input type="checkbox" name="mail" id="mail" value="Y" checked>
-                <label for="save"><?= GetMessage('MOD_UNINST_SAVE_EVENTS')?></label>
+                <label for="mail"><?= GetMessage('MOD_UNINST_SAVE_EVENTS')?></label>
             </p>
         </div>
         <?}?>
