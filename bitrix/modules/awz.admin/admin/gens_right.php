@@ -16,7 +16,7 @@ if(!Loader::includeModule($module_id)) return;
 if(!AccessController::can(0, ActionDictionary::ACTION_GENS_RIGHT))
     $APPLICATION->AuthForm(Loc::getMessage("ACCESS_DENIED"));
 
-if(file_exists('check_awz_admin.php')){
+if(file_exists(__DIR__. DIRECTORY_SEPARATOR.'check_awz_admin.php')){
     require_once('check_awz_admin.php');
 }elseif(!Loader::includeModule('awz.admin')){
     return;
