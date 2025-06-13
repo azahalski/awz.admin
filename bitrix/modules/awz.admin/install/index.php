@@ -8,7 +8,7 @@ Loc::loadMessages(__FILE__);
 
 class awz_admin extends CModule
 {
-	var $MODULE_ID = "awz.admin";
+    var $MODULE_ID;
     var $MODULE_VERSION;
     var $MODULE_VERSION_DATE;
     var $MODULE_NAME;
@@ -22,16 +22,18 @@ class awz_admin extends CModule
         $arModuleVersion = array();
         include(__DIR__.'/version.php');
 
-        $dirs = explode('/',dirname(__DIR__ . '../'));
+        $dirs = explode(DIRECTORY_SEPARATOR, dirname(__DIR__, 1));
         $this->MODULE_ID = array_pop($dirs);
         unset($dirs);
 
-		$this->MODULE_VERSION = $arModuleVersion["VERSION"];
-		$this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
+        $this->MODULE_VERSION = $arModuleVersion["VERSION"];
+        $this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
+
         $this->MODULE_NAME = Loc::getMessage("AWZ_ADMIN_MODULE_NAME");
         $this->MODULE_DESCRIPTION = Loc::getMessage("AWZ_ADMIN_MODULE_DESCRIPTION");
         $this->PARTNER_NAME = Loc::getMessage("AWZ_PARTNER_NAME");
-        $this->PARTNER_URI = Loc::getMessage("AWZ_PARTNER_URI");
+        $this->PARTNER_URI = "https://zahalski.dev/";
+
 		return true;
 	}
 
@@ -47,10 +49,10 @@ class awz_admin extends CModule
 
         ModuleManager::RegisterModule($this->MODULE_ID);
 
-        $filePath = dirname(__DIR__) . '/options.php';
-        if(file_exists($filePath)){
-            LocalRedirect('/bitrix/admin/settings.php?lang='.LANG.'&mid='.$this->MODULE_ID);
-        }
+        $APPLICATION->IncludeAdminFile(
+            Loc::getMessage("AWZ_ADMIN_MODULE_NAME"),
+            $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/'. $this->MODULE_ID .'/install/solution.php'
+        );
 
         return true;
     }
@@ -60,17 +62,23 @@ class awz_admin extends CModule
         global $APPLICATION, $step;
 
         $step = intval($step);
-        if($step < 2) { //выводим предупреждение
-            $APPLICATION->IncludeAdminFile(Loc::getMessage('AWZ_ADMIN_INSTALL_TITLE'), $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/'. $this->MODULE_ID .'/install/unstep.php');
+        if($step < 2) {
+            $APPLICATION->IncludeAdminFile(
+                Loc::getMessage('AWZ_ADMIN_MODULE_NAME'),
+                $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/'. $this->MODULE_ID .'/install/unstep.php'
+            );
         }
         elseif($step == 2) {
-            //проверяем условие
             if($_REQUEST['save'] != 'Y' && !isset($_REQUEST['save'])) {
                 $this->UnInstallDB();
             }
             $this->UnInstallFiles();
             $this->UnInstallEvents();
             $this->deleteAgents();
+
+            if($_REQUEST['saveopts'] != 'Y' && !isset($_REQUEST['saveopts'])) {
+                \Bitrix\Main\Config\Option::delete($this->MODULE_ID);
+            }
 
             ModuleManager::UnRegisterModule($this->MODULE_ID);
 
@@ -175,6 +183,7 @@ class awz_admin extends CModule
     }
 
     function deleteAgents() {
+        CAgent::RemoveModuleAgents("sale");
         return true;
     }
 
