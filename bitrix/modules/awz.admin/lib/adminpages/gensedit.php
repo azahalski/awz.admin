@@ -61,14 +61,14 @@ class GensEdit extends IForm implements IParams {
         $valueField = $this->getFieldValue($arField['NAME']);
         if(isset($valueField['files']) && !empty($valueField['files'])){
             foreach($valueField['files'] as $code=>$filePath){
-                $file = new File($_SERVER['DOCUMENT_ROOT'].$filePath);
+                $file = new File($_SERVER['DOCUMENT_ROOT'].htmlspecialcharsEx($filePath));
                 if($file->isExists()){
                     ?>
                     <p>
-                        <input type="hidden" name="<?=$arField['NAME']?>[files][<?=$code?>]" value="<?=htmlspecialcharsEx($filePath)?>">
-                        <?=$code?>: <?=$filePath?><br>
+                        <input type="hidden" name="<?=$arField['NAME']?>[files][<?=htmlspecialcharsEx($code)?>]" value="<?=htmlspecialcharsEx($filePath)?>">
+                        <?=htmlspecialcharsEx($code)?>: <?=htmlspecialcharsEx($filePath)?><br>
                         <?=Loc::getMessage('AWZ_ADMIN_GENS_EDIT_CHECK_DEL')?>:
-                        <input type="checkbox" name="<?=$arField['NAME']?>[files_del][<?=$code?>]" value="Y">
+                        <input type="checkbox" name="<?=$arField['NAME']?>[files_del][<?=htmlspecialcharsEx($code)?>]" value="Y">
                     </p>
                     <?php
                 }
