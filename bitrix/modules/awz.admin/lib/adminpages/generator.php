@@ -156,7 +156,7 @@ class Generator extends IForm implements IParams {
             return;
         }
 
-        $path = $_SERVER['DOCUMENT_ROOT'].$_REQUEST['FIELD_ENTITY'];
+        $path = $_SERVER['DOCUMENT_ROOT'].htmlspecialcharsEx($_REQUEST['FIELD_ENTITY']);
         $file = new File($path);
         $content = $file->getContents();
         if(preg_match('/namespace\s([0-9A-z]+)/is', $content, $match)){
@@ -181,7 +181,7 @@ class Generator extends IForm implements IParams {
         $moduleAdminEditContent = $tmp->getContents();
         $moduleAdminEditContent = str_replace('Awz\Admin\AdminPages\PageItemEdit',$nameSpace.'\\AdminPages\\'.str_replace('Table','',$entityClass).'Edit',$moduleAdminEditContent);
 
-        $temp = explode('/',$_REQUEST['FIELD_ENTITY']);
+        $temp = explode('/',htmlspecialcharsEx($_REQUEST['FIELD_ENTITY']));
         array_pop($temp);
         $temp[] = 'adminpages';
         $temp[] = strtolower(str_replace('Table','',$entityClass).'List').'.php';
@@ -196,7 +196,7 @@ class Generator extends IForm implements IParams {
         }
         $moduleAdminListClassLang = implode('/',$langPath);
 
-        $temp = explode('/',$_REQUEST['FIELD_ENTITY']);
+        $temp = explode('/',htmlspecialcharsEx($_REQUEST['FIELD_ENTITY']));
         array_pop($temp);
         $temp[] = 'adminpages';
         $temp[] = strtolower(str_replace('Table','',$entityClass).'Edit').'.php';
@@ -262,7 +262,7 @@ class Generator extends IForm implements IParams {
             $moduleAdminEditClassContentLang
         );
 
-        $temp = explode('/',$_REQUEST['FIELD_ENTITY']);
+        $temp = explode('/',htmlspecialcharsEx($_REQUEST['FIELD_ENTITY']));
         array_pop($temp);
         $temp[] = 'adminpages';
         $temp[] = strtolower(str_replace('Table','',$entityClass).'Edit').'.php';

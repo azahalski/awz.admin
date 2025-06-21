@@ -542,8 +542,8 @@ class IForm {
 					<?
 					if($this->getFieldValue($arField["NAME"])){
 					?>
-						window.GLOBAL_arMapObjects["<?=$arField["ID"]?>"].geoObjects.add(new ymaps.Placemark([<?=$this->getFieldValue($arField["NAME"])?>], {
-							balloonContent: 'Current: <?=$this->getFieldValue($arField["NAME"])?>'
+						window.GLOBAL_arMapObjects["<?=$arField["ID"]?>"].geoObjects.add(new ymaps.Placemark([<?=htmlspecialcharsEx($this->getFieldValue($arField["NAME"]))?>], {
+							balloonContent: 'Current: <?=htmlspecialcharsEx($this->getFieldValue($arField["NAME"]))?>'
 						}, {
 							preset: 'islands#icon',
 							iconColor: '#0000000'
