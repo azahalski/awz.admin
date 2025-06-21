@@ -439,7 +439,7 @@ class IForm {
 			case "INT" : 
 				$size = (isset($arField["SIZE"])) ? $arField["SIZE"] : 40;
 				?>
-				<input type="text" id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" value="<?=intval($this->getFieldValue($arField["NAME"]))?>" size="<?=$size?>" />
+				<input type="text" id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" value="<?=intval(htmlspecialcharsEx($this->getFieldValue($arField["NAME"])))?>" size="<?=$size?>" />
 				<?
 				break;
 			case "FILE_DIALOG" :
@@ -460,14 +460,14 @@ class IForm {
                     name="<?=$arField["NAME"]?>"
                     id="<?=$arField["NAME"]?>"
                     type="text"
-                    value="<?=$this->getFieldValue($arField["NAME"])?>"
+                    value="<?=htmlspecialcharsEx($this->getFieldValue($arField["NAME"]))?>"
                     size="35">
                 <input type="button" value="..." onClick="window.<?=$arField["NAME"]?>()">
                 <?
                 break;
 			case "FILE" :
 				?>
-				<input type="hidden" name="<?=$arField["NAME"]?>_old" value="<?=$this->getFieldValue($arField["NAME"])?>">
+				<input type="hidden" name="<?=$arField["NAME"]?>_old" value="<?=htmlspecialcharsEx($this->getFieldValue($arField["NAME"]))?>">
 				<?
 				echo \Bitrix\Main\UI\FileInput::createInstance(array(
 					"name" => $arField["NAME"],
@@ -485,7 +485,7 @@ class IForm {
 			case "STRING" : 
 				$size = (isset($arField["SIZE"])) ? $arField["SIZE"] : 40;
 				?>
-				<input type="text" id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" value="<?=htmlspecialcharsbx($this->getFieldValue($arField["NAME"]))?>" size="<?=$size?>"<?= isset($arField['ADD_STR']) ? ' '.$arField['ADD_STR'] : ''?>/>
+				<input type="text" id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" value="<?=htmlspecialcharsEx($this->getFieldValue($arField["NAME"]))?>" size="<?=$size?>"<?= isset($arField['ADD_STR']) ? ' '.$arField['ADD_STR'] : ''?>/>
 				<?
 				break;
 			case "DATE" : 
@@ -499,7 +499,7 @@ class IForm {
 				$size = (isset($arField["COLS"])) ? $arField["COLS"] : 42;
 				$size2 = (isset($arField["ROWS"])) ? $arField["ROWS"] : 5;
 				?>
-				<textarea id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" rows="<?=$size2?>" cols="<?=$size?>"><?=htmlspecialcharsbx($this->getFieldValue($arField["NAME"]))?></textarea>
+				<textarea id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" rows="<?=$size2?>" cols="<?=$size?>"><?=htmlspecialcharsEx($this->getFieldValue($arField["NAME"]))?></textarea>
 				<?
 				break;
 			case 'SELECT':
@@ -527,7 +527,7 @@ class IForm {
 				\CUtil::InitJSCore('jquery');
 				?>
 				<script src="//api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU" type="text/javascript"></script>
-				<input type="text" id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" value="<?=htmlspecialcharsbx($this->getFieldValue($arField["NAME"]))?>" size="<?=$size?>" />
+				<input type="text" id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" value="<?=htmlspecialcharsEx($this->getFieldValue($arField["NAME"]))?>" size="6" />
 				<div id="map<?=$arField["ID"]?>" style="width:100%;height:400px;"></div>
 				<script type="text/javascript">
 				$(document).ready(function(){
@@ -590,7 +590,7 @@ class IForm {
 			default:
 			$size = (isset($arField["SIZE"])) ? $arField["SIZE"] : 40;
 			?>
-			<input type="text" id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" value="<?=htmlspecialcharsbx($this->getFieldValue($arField["NAME"]))?>" size="<?=$size?>" />
+			<input type="text" id="field_<?=$arField["ID"]?>" name="<?=$arField["NAME"]?>" value="<?=htmlspecialcharsEx($this->getFieldValue($arField["NAME"]))?>" size="<?=$size?>" />
 			<?
 			break;
 		}

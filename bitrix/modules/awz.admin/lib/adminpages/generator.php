@@ -277,19 +277,19 @@ class Generator extends IForm implements IParams {
 
         <h2><?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_LIST_PAGE_LABEL')?>:</h2>
         <h3>1. <?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_FILE_PATH')?> admin</h3>
-        <p><input type="text" size="70" name="bxAdminList" value="<?=($_REQUEST['bxAdminList'] ? $_REQUEST['bxAdminList'] : $bxAdminList)?>"></p>
+        <p><input type="text" size="70" name="bxAdminList" value="<?=($_REQUEST['bxAdminList'] ? htmlspecialcharsEx($_REQUEST['bxAdminList']) : $bxAdminList)?>"></p>
         <h3><?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_FILE_PATH_CONTENT')?></h3>
-        <p><textarea cols="90" name="bxAdminListContent" rows="3"><?=($_REQUEST['bxAdminListContent'] ? $_REQUEST['bxAdminListContent'] : $bxAdminListContent)?></textarea></p>
+        <p><textarea cols="90" name="bxAdminListContent" rows="3"><?=($_REQUEST['bxAdminListContent'] ? htmlspecialcharsEx($_REQUEST['bxAdminListContent']) : $bxAdminListContent)?></textarea></p>
         <h3>2. <?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_FILE_PATH')?> admin <?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_FILE_PATH_MODULE')?></h3>
-        <p><input type="text" size="70" name="moduleAdminList" value="<?=($_REQUEST['moduleAdminList'] ? $_REQUEST['moduleAdminList'] : $moduleAdminList)?>"></p>
+        <p><input type="text" size="70" name="moduleAdminList" value="<?=($_REQUEST['moduleAdminList'] ? htmlspecialcharsEx($_REQUEST['moduleAdminList']) : $moduleAdminList)?>"></p>
         <h3><?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_FILE_PATH_CONTENT')?></h3>
-        <p><textarea cols="90" name="moduleAdminListContent" rows="30"><?=($_REQUEST['moduleAdminListContent'] ? $_REQUEST['moduleAdminListContent'] : $moduleAdminListContent)?></textarea></p>
+        <p><textarea cols="90" name="moduleAdminListContent" rows="30"><?=($_REQUEST['moduleAdminListContent'] ? htmlspecialcharsEx($_REQUEST['moduleAdminListContent']) : $moduleAdminListContent)?></textarea></p>
         <h3>3. <?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_FILE_PATH_PRM')?></h3>
-        <p><input type="text" size="70" name="moduleAdminListClass" value="<?=($_REQUEST['moduleAdminListClass'] ? $_REQUEST['moduleAdminListClass'] : $moduleAdminListClass)?>"></p>
-        <p><textarea cols="90" name="moduleAdminListClassContent" rows="30"><?=($_REQUEST['moduleAdminListClassContent'] ? $_REQUEST['moduleAdminListClassContent'] : $moduleAdminListClassContent)?></textarea></p>
+        <p><input type="text" size="70" name="moduleAdminListClass" value="<?=($_REQUEST['moduleAdminListClass'] ? htmlspecialcharsEx($_REQUEST['moduleAdminListClass']) : $moduleAdminListClass)?>"></p>
+        <p><textarea cols="90" name="moduleAdminListClassContent" rows="30"><?=($_REQUEST['moduleAdminListClassContent'] ? htmlspecialcharsEx($_REQUEST['moduleAdminListClassContent']) : $moduleAdminListClassContent)?></textarea></p>
         <h3>4. <?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_FILE_PATH_PRM_LANG')?></h3>
-        <p><input type="text" size="70" name="moduleAdminListClassLang" value="<?=($_REQUEST['moduleAdminListClassLang'] ? $_REQUEST['moduleAdminListClassLang'] : $moduleAdminListClassLang)?>"></p>
-        <p><textarea cols="90" name="moduleAdminListClassContentLang" rows="3"><?=($_REQUEST['moduleAdminListClassContentLang'] ? $_REQUEST['moduleAdminListClassContentLang'] : $moduleAdminListClassContentLang)?></textarea></p>
+        <p><input type="text" size="70" name="moduleAdminListClassLang" value="<?=($_REQUEST['moduleAdminListClassLang'] ? htmlspecialcharsEx($_REQUEST['moduleAdminListClassLang']) : $moduleAdminListClassLang)?>"></p>
+        <p><textarea cols="90" name="moduleAdminListClassContentLang" rows="3"><?=($_REQUEST['moduleAdminListClassContentLang'] ? htmlspecialcharsEx($_REQUEST['moduleAdminListClassContentLang']) : $moduleAdminListClassContentLang)?></textarea></p>
         <p style="padding:10px;margin:10px 0;border:1px solid #000000;">
             <input type="checkbox" name="put_list_page" value="Y"/><br><br>
             <?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_LIST_PAGE_DESC')?>

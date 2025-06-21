@@ -381,9 +381,9 @@ class GensRight extends IForm implements IParams {
                             $cn++;
                             ?>
                             <tr>
-                                <td><input <?if($constValue=='MODULE'){?>readonly="readonly" <?}?>type="text" name="ROWS[<?=$constValue?>][<?=$cn?>][CODE]" value="<?=$permName?>"></td>
-                                <td><input size="4" <?if($constValue=='MODULE'){?>readonly="readonly" <?}?>type="text" name="ROWS[<?=$constValue?>][<?=$cn?>][VALUE]" value="<?=$permValue?>"></td>
-                                <td><input <?if($constValue=='MODULE'){?>readonly="readonly" <?}?>type="text" name="ROWS[<?=$constValue?>][<?=$cn?>][RIGHT]" value="<?=$actionNameVal?>"></td>
+                                <td><input <?if($constValue=='MODULE'){?>readonly="readonly" <?}?>type="text" name="ROWS[<?=$constValue?>][<?=$cn?>][CODE]" value="<?=htmlspecialcharsEx($permName)?>"></td>
+                                <td><input size="4" <?if($constValue=='MODULE'){?>readonly="readonly" <?}?>type="text" name="ROWS[<?=$constValue?>][<?=$cn?>][VALUE]" value="<?=htmlspecialcharsEx($permValue)?>"></td>
+                                <td><input <?if($constValue=='MODULE'){?>readonly="readonly" <?}?>type="text" name="ROWS[<?=$constValue?>][<?=$cn?>][RIGHT]" value="<?=htmlspecialcharsEx($actionNameVal)?>"></td>
                                 <td>
                                     <input size="40" <?if($constValue=='MODULE'){?>readonly="readonly" <?}?>type="text" name="ROWS[<?=$constValue?>][<?=$cn?>][NAME]" value="<?=Loc::getMessage('AWZ_CONFIG_PERMISSION_SECTION_'.$constValue.'_'.$permValue)?>">
                                 </td>

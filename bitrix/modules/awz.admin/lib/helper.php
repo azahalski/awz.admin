@@ -1254,7 +1254,7 @@ class Helper {
         }
         if(is_array($values)){
             foreach($values as $v){
-                $html .= '<div class="wrp_awz_add_input"><input type="text" size="'.$size.'" value="'.htmlspecialcharsex($v).'" name="'.$cn.'"></div>';
+                $html .= '<div class="wrp_awz_add_input"><input type="text" size="'.$size.'" value="'.htmlspecialcharsEx($v).'" name="'.$cn.'"></div>';
                 $cn++;
             }
         }
@@ -1280,7 +1280,7 @@ class Helper {
                     $currencyList[$vAr[1]] = $vAr[1];
                 }
                 $html .= '<div class="wrp_awz_add_input">';
-                $html .= '<input type="text" size="'.$size.'" value="'.htmlspecialcharsex($vAr[0]).'" name="'.$cn.'">';
+                $html .= '<input type="text" size="'.$size.'" value="'.htmlspecialcharsEx($vAr[0]).'" name="'.$cn.'">';
                 $html .= '<select name="'.$cn.'_currency">';
                 foreach($currencyList as $val=>$name){
                     if(isset($vAr[1]) && $vAr[1] == $val){

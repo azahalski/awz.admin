@@ -442,9 +442,9 @@ class PublicList extends \CAdminUiList
                     {
                         case "checkbox":
                             if ($value == "Y")
-                                $value = htmlspecialcharsex(Loc::getMessage("admin_lib_list_yes"));
+                                $value = htmlspecialcharsEx(Loc::getMessage("admin_lib_list_yes"));
                             else
-                                $value = htmlspecialcharsex(Loc::getMessage("admin_lib_list_no"));
+                                $value = htmlspecialcharsEx(Loc::getMessage("admin_lib_list_no"));
                             break;
                         case "select":
                             if(is_array($value)){
@@ -453,11 +453,11 @@ class PublicList extends \CAdminUiList
                                     $v = trim($v);
                                     if($v){
                                         if(isset($field["edit"]["values"][$v])){
-                                            $valAr[$v] = htmlspecialcharsex($field["edit"]["values"][$v]);
+                                            $valAr[$v] = htmlspecialcharsEx($field["edit"]["values"][$v]);
                                         }elseif(isset($field["view"]["values"][$v])){
-                                            $valAr[$v] = htmlspecialcharsex($field["view"]["values"][$v]);
+                                            $valAr[$v] = htmlspecialcharsEx($field["view"]["values"][$v]);
                                         }else{
-                                            $valAr[$v] = "ID: ".htmlspecialcharsex($v);
+                                            $valAr[$v] = "ID: ".htmlspecialcharsEx($v);
                                         }
                                     }
                                 }
@@ -466,11 +466,11 @@ class PublicList extends \CAdminUiList
                             }else{
                                 if (isset($field["edit"]["values"][$value]))
                                 {
-                                    $value = htmlspecialcharsex($field["edit"]["values"][$value]);
+                                    $value = htmlspecialcharsEx($field["edit"]["values"][$value]);
                                 }
                                 elseif (isset($field["view"]["values"][$value]))
                                 {
-                                    $value = htmlspecialcharsex($field["view"]["values"][$value]);
+                                    $value = htmlspecialcharsEx($field["view"]["values"][$value]);
                                 }
                             }
                             break;
@@ -482,7 +482,7 @@ class PublicList extends \CAdminUiList
                             $value = $field["view"]["value"];
                             break;
                         default:
-                            $value = htmlspecialcharsex($value);
+                            $value = htmlspecialcharsEx($value);
                             break;
                     }
                 }
