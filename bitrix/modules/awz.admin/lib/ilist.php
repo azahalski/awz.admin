@@ -504,7 +504,11 @@ class IList
         $entity = $this->getParam("ENTITY");
         foreach($this->filter as $code=>&$value){
             $codeFormat = preg_replace('/([^0-9A-z_])/is','',$code);
-            $obField = $entity::getEntity()->getField($codeFormat);
+            try{
+                $obField = $entity::getEntity()->getField($codeFormat);
+            }catch (\Exception $e){
+                $obField = null;
+            }
             if(!$obField) continue;
             if($obField instanceof \Bitrix\Main\ORM\Fields\DatetimeField){
                 $value = \Bitrix\Main\Type\DateTime::createFromTimestamp(strtotime($value));
