@@ -151,7 +151,7 @@ class Generator extends IForm implements IParams {
         if(!$activeTimeGen) {
             ?>
             <pre style="margin:0;"><?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_ADD_CODE')?>:<br>\Bitrix\Main\Config\Option::set("awz.admin", "active", time()+30*60, "");</pre>
-            <a href="/bitrix/admin/php_command_line.php?lang=ru"><?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_CMD_LINE')?></a>
+            <a href="/bitrix/admin/php_command_line.php?lang=<?=LANGUAGE_ID?>"><?=Loc::getMessage('AWZ_ADMIN_ADMINPAGES_GENERATOR_CMD_LINE')?></a>
             <?
             return;
         }
@@ -191,7 +191,7 @@ class Generator extends IForm implements IParams {
             $langPath[] = $path;
             if($key===3){
                 $langPath[] = 'lang';
-                $langPath[] = 'ru';
+                $langPath[] = LANGUAGE_ID;
             }
         }
         $moduleAdminListClassLang = implode('/',$langPath);
@@ -206,7 +206,7 @@ class Generator extends IForm implements IParams {
             $langPath[] = $path;
             if($key===3){
                 $langPath[] = 'lang';
-                $langPath[] = 'ru';
+                $langPath[] = LANGUAGE_ID;
             }
         }
         $moduleAdminEditClassLang = implode('/',$langPath);

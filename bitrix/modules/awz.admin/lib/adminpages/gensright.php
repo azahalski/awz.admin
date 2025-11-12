@@ -60,7 +60,7 @@ class GensRight extends IForm implements IParams {
 
         $fileActions = new File($modulePath.'/custom/actiondictionary.php');
         $filePermsDictonary = new File($modulePath.'/custom/permissiondictionary.php');
-        $fileLangPermDict = new File(str_replace('/lib/','/lang/ru/lib/',$modulePath).'/custom/permissiondictionary.php');
+        $fileLangPermDict = new File(str_replace('/lib/','/lang/'.LANGUAGE_ID.'/lib/',$modulePath).'/custom/permissiondictionary.php');
 
         $allValues = [];
         foreach($permsRefl->getConstants() as $permName=>$permValue){
@@ -78,7 +78,7 @@ class GensRight extends IForm implements IParams {
             }
 
             $file = new File($modulePath.'/custom/componentconfig.php');
-            $fileLang = new File(str_replace('/lib/','/lang/ru/lib/',$modulePath).'/custom/componentconfig.php');
+            $fileLang = new File(str_replace('/lib/','/lang/'.LANGUAGE_ID.'/lib/',$modulePath).'/custom/componentconfig.php');
 
             $codesExists = [];
 
@@ -123,7 +123,7 @@ class GensRight extends IForm implements IParams {
                     }
                 }
                 $file->putContents(implode("\n", $contentArNew));
-                \LocalRedirect($APPLICATION->getCurPage(false).'?lang=ru&FIELD_ENTITY='.$_REQUEST['FIELD_ENTITY'].'&is_redirect=1');
+                \LocalRedirect($APPLICATION->getCurPage(false).'?lang='.LANGUAGE_ID.'&FIELD_ENTITY='.$_REQUEST['FIELD_ENTITY'].'&is_redirect=1');
                 return;
             }
         }
@@ -288,7 +288,7 @@ class GensRight extends IForm implements IParams {
         }
 
         if($add){
-            \LocalRedirect($APPLICATION->getCurPage(false).'?lang=ru&FIELD_ENTITY='.$_REQUEST['FIELD_ENTITY'].'&is_redirect=1');
+            \LocalRedirect($APPLICATION->getCurPage(false).'?lang='.LANGUAGE_ID.'&FIELD_ENTITY='.$_REQUEST['FIELD_ENTITY'].'&is_redirect=1');
         }
     }
 
@@ -303,7 +303,7 @@ class GensRight extends IForm implements IParams {
         if($_REQUEST['is_redirect']){
             global $APPLICATION;
             sleep(3); //reflection cache
-            \LocalRedirect($APPLICATION->getCurPage(false).'?lang=ru&FIELD_ENTITY='.$_REQUEST['FIELD_ENTITY']);
+            \LocalRedirect($APPLICATION->getCurPage(false).'?lang='.LANGUAGE_ID.'&FIELD_ENTITY='.$_REQUEST['FIELD_ENTITY']);
             return;
         }
 
@@ -450,8 +450,8 @@ class GensRight extends IForm implements IParams {
                 $toModulePath = $_SERVER['DOCUMENT_ROOT']."/bitrix/modules/".$moduleName;
 
                 \CopyDirFiles(
-                    $fromModulePath."/lang/ru/lib/access/",
-                    $toModulePath."/lang/ru/lib/access/",
+                    $fromModulePath."/lang/".LANGUAGE_ID."/lib/access/",
+                    $toModulePath."/lang/".LANGUAGE_ID."/lib/access/",
                     true, true
                 );
                 \CopyDirFiles(
