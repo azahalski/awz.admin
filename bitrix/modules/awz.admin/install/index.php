@@ -139,11 +139,11 @@ class awz_admin extends CModule
     {
         $eventManager = EventManager::getInstance();
         $eventManager->unRegisterEventHandler(
-            'sale', 'OnAfterUserUpdate',
+            'main', 'OnAfterUserUpdate',
             $this->MODULE_ID, '\\Awz\\Admin\\Access\\Handlers', 'OnAfterUserUpdate'
         );
         $eventManager->unRegisterEventHandler(
-            'sale', 'OnAfterUserAdd',
+            'main', 'OnAfterUserAdd',
             $this->MODULE_ID, '\\Awz\\Admin\\Access\\Handlers', 'OnAfterUserUpdate'
         );
         return true;
